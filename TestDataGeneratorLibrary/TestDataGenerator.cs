@@ -53,20 +53,30 @@ namespace TestDataGeneratorLibrary
             return gender;
         }
 
+        // Picks a random name from the given list depending on the gender.
+        public static string GetRandomNameFromList(Person.Sex gender, string[] maleNameList, string[] femaleNameList)
+        {
+            string name = "";
+
+            if (gender.Equals(Person.Sex.Male))
+            {
+                name = GetRandomStringFromArray(maleNameList);
+            }
+            else
+            {
+                name = GetRandomStringFromArray(femaleNameList);
+            }
+
+            return name;
+        }
+
         // If optional parameter firstName is given, then the method returns the argument without modifying it.
         // Otherwise it picks and returns a random first name depending on gender argument. If gender is male, then the method uses list of male names and vice versa.
         public static string GenerateRandomFirstName(Person.Sex gender, string firstName = null)
         {
             if (firstName == null)
             {
-                if (gender.Equals(Person.Sex.Male))
-                {
-                    firstName = GetRandomStringFromArray(Person.firstNameMales());
-                }
-                else
-                {
-                    firstName = GetRandomStringFromArray(Person.firstNameFemales());
-                }
+                firstName = GetRandomNameFromList(gender, Person.firstNameMales(), Person.firstNameFemales());
             }
 
             return firstName;
@@ -78,14 +88,7 @@ namespace TestDataGeneratorLibrary
         {
             if (lastName == null)
             {
-                if (gender.Equals(Person.Sex.Male))
-                {
-                    lastName = GetRandomStringFromArray(Person.lastNameMales());
-                }
-                else
-                {
-                    lastName = GetRandomStringFromArray(Person.lastNameFemales());
-                }
+                lastName = GetRandomNameFromList(gender, Person.lastNameMales(), Person.lastNameFemales());
             }
 
             return lastName;
