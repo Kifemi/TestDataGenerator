@@ -111,7 +111,7 @@ namespace TestDataGeneratorLibrary
 
             return age;
         }
-        
+
 
         // Creates and returns People object with randomized attributes.
         public static Person GenerateRandomPerson(string firstName = null, string lastName = null, int? ageOrNull = null, Person.Sex gender = Person.Sex.Random)
@@ -123,6 +123,17 @@ namespace TestDataGeneratorLibrary
 
             Person person = new Person(randomFirstName, randomLastName, randomAge, randomSex);
             return person;
+        }
+
+        public static List<Person> GenerateListOfRandomPeople(int amount)
+        {
+            List<Person> people = new List<Person>();
+            for (int i = 0; i < amount; i++)
+            {
+                people.Add(GenerateRandomPerson());
+            }
+
+            return people;
         }
     }
 
