@@ -8,6 +8,7 @@ namespace TestDataGeneratorLibrary
 
     public class Person
     {
+        // Properties
         public enum Sex
         {
             Male,
@@ -43,7 +44,7 @@ namespace TestDataGeneratorLibrary
             set { gender = value; }
         }
 
-
+        // Constructor
         public Person(string firstName, string lastName, int age, Sex gender)
         {
             this.FirstName = firstName;
@@ -52,6 +53,7 @@ namespace TestDataGeneratorLibrary
             this.Gender = gender;
         }
 
+        // Name lists
         public static string[] firstNameMales()
         {
             string[] maleNames = { "Johnny", "Jack", "Brad", "Tom", "Bruce", "Harrison", "Michael", "Clint" };

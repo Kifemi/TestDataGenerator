@@ -6,6 +6,7 @@ namespace TestDataGeneratorLibrary
 {
     public class TestDataGenerator
     {
+        // Picks and returns a random string from the array.
         public static string GetRandomStringFromArray(string[] nameList)
         {
             Random rand = new Random();
@@ -13,6 +14,7 @@ namespace TestDataGeneratorLibrary
             return nameList[randomIndex];
         }
 
+        // Picks and returns a random integer, which is larger than min and less than max arguments. Prints error message if min is larger than max.
         public static int RandomInt(int min, int max)
         {
             Random rand = new Random();
@@ -31,6 +33,7 @@ namespace TestDataGeneratorLibrary
             return randomNumber;
         }
 
+        // Picks a random gender. Options are male and female.
         public static Person.Sex RandomSex()
         {
             int randomNumber = RandomInt(0, 2);
@@ -38,6 +41,8 @@ namespace TestDataGeneratorLibrary
             return((Person.Sex)randomNumber);
         }
 
+        // Generates a random gender depending from the given argument. 
+        // If the argument is Sex.Random then the options are male and female, otherwise the methods returns the argument without modifying it.
         public static Person.Sex GenerateRandomSex(Person.Sex gender)
         {
             if(gender.Equals(Person.Sex.Random))
@@ -48,6 +53,8 @@ namespace TestDataGeneratorLibrary
             return gender;
         }
 
+        // If optional parameter firstName is given, then the method returns the argument without modifying it.
+        // Otherwise it picks and returns a random first name depending on gender argument. If gender is male, then the method uses list of male names and vice versa.
         public static string GenerateRandomFirstName(Person.Sex gender, string firstName = null)
         {
             if (firstName == null)
@@ -65,6 +72,8 @@ namespace TestDataGeneratorLibrary
             return firstName;
         }
 
+        // If optional parameter lastName is given, then the method returns the argument without modifying it.
+        // Otherwise it picks and returns a random last name depending on gender argument. If gender is male, then the method uses list of male names and vice versa.
         public static string GenerateRandomLastName(Person.Sex gender, string lastName = null)
         {
             if (lastName == null)
@@ -82,6 +91,8 @@ namespace TestDataGeneratorLibrary
             return lastName;
         }
 
+        // If optional parameter is given, then the method returns the argument without modifying it.
+        // Otherwise the method picks and returns a random integer between 0 and 100.
         public static int GenerateRandomAge(int? ageOrNull = null)
         {
             int age;
@@ -99,7 +110,7 @@ namespace TestDataGeneratorLibrary
         }
         
 
-
+        // Creates and returns People object with randomized attributes.
         public static Person GenerateRandomPerson(string firstName = null, string lastName = null, int? ageOrNull = null, Person.Sex gender = Person.Sex.Random)
         {
             Person.Sex randomSex = GenerateRandomSex(gender);
