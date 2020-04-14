@@ -32,26 +32,56 @@ namespace TestDataGeneratorLibrary
 
         public static Person.Sex RandomSex()
         {
-            //string str = "";
             int randomNumber = RandomInt(0, 2);
-            //if (Enum.IsDefined(typeof(Person.Sex), randomNumber))
-            //{
-            //    return ((Person.Sex) randomNumber);
-            //}
-            //else
-            //{
-            //    str = "Invalid value";
-            //}
 
             return((Person.Sex)randomNumber);
         }
 
-        public static Person GenerateRandomPerson()
+        public static Person GenerateRandomPerson(string firstName = null, string lastName = null, int? ageOrNull = null, Person.Sex gender = Person.Sex.Random)
         {
-            string firstName = GetRandomStringFromArray(Person.firstNameMales());
-            string lastName = GetRandomStringFromArray(Person.lastNameMales());
-            int age = RandomInt(0, 100);
-            Person.Sex gender = RandomSex();
+
+            if (gender.Equals(Person.Sex.Random))
+            {
+                gender = RandomSex();
+            }
+
+            int age;
+            
+
+            if (firstName == null)
+            {
+                if (gender.Equals(Person.Sex.Male))
+                {
+                    firstName = GetRandomStringFromArray(Person.firstNameMales());
+                }
+                else
+                {
+                    firstName = GetRandomStringFromArray(Person.firstNameFemales());
+                }
+            }
+
+            if (lastName == null)
+            {
+                if (gender.Equals(Person.Sex.Male))
+                {
+                    lastName = GetRandomStringFromArray(Person.lastNameMales());
+                }
+                else
+                {
+                    lastName = GetRandomStringFromArray(Person.lastNameFemales());
+                }
+            }
+            
+            if(ageOrNull == null)
+            {
+                age = RandomInt(0, 100);
+            }
+            else
+            {
+                age = Convert.ToInt32(ageOrNull);
+            }
+            
+            
 
             Person person = new Person(firstName, lastName, age, gender);
             return person;

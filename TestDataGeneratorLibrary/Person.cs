@@ -11,7 +11,8 @@ namespace TestDataGeneratorLibrary
         public enum Sex
         {
             Male,
-            Female
+            Female,
+            Random
         }
 
         private string firstName;
