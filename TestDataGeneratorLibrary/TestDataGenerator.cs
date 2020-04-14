@@ -25,6 +25,7 @@ namespace TestDataGeneratorLibrary
             else
             {
                 Console.WriteLine("Arvon min pitää olla arvoa max pienempi");
+                randomNumber = 0;
             }
 
             return randomNumber;
@@ -37,17 +38,18 @@ namespace TestDataGeneratorLibrary
             return((Person.Sex)randomNumber);
         }
 
-        public static Person GenerateRandomPerson(string firstName = null, string lastName = null, int? ageOrNull = null, Person.Sex gender = Person.Sex.Random)
+        public static Person.Sex GenerateRandomSex(Person.Sex gender)
         {
-
-            if (gender.Equals(Person.Sex.Random))
+            if(gender.Equals(Person.Sex.Random))
             {
                 gender = RandomSex();
             }
 
-            int age;
-            
+            return gender;
+        }
 
+        public static string GenerateRandomFirstName(Person.Sex gender, string firstName = null)
+        {
             if (firstName == null)
             {
                 if (gender.Equals(Person.Sex.Male))
@@ -60,6 +62,11 @@ namespace TestDataGeneratorLibrary
                 }
             }
 
+            return firstName;
+        }
+
+        public static string GenerateRandomLastName(Person.Sex gender, string lastName = null)
+        {
             if (lastName == null)
             {
                 if (gender.Equals(Person.Sex.Male))
@@ -71,8 +78,15 @@ namespace TestDataGeneratorLibrary
                     lastName = GetRandomStringFromArray(Person.lastNameFemales());
                 }
             }
-            
-            if(ageOrNull == null)
+
+            return lastName;
+        }
+
+        public static int GenerateRandomAge(int? ageOrNull = null)
+        {
+            int age;
+
+            if (ageOrNull == null)
             {
                 age = RandomInt(0, 100);
             }
@@ -80,10 +94,20 @@ namespace TestDataGeneratorLibrary
             {
                 age = Convert.ToInt32(ageOrNull);
             }
-            
-            
 
-            Person person = new Person(firstName, lastName, age, gender);
+            return age;
+        }
+        
+
+
+        public static Person GenerateRandomPerson(string firstName = null, string lastName = null, int? ageOrNull = null, Person.Sex gender = Person.Sex.Random)
+        {
+            Person.Sex randomSex = GenerateRandomSex(gender);
+            string randomFirstName = GenerateRandomFirstName(randomSex, firstName);
+            string randomLastName = GenerateRandomLastName(randomSex, lastName);
+            int randomAge = GenerateRandomAge(ageOrNull);
+
+            Person person = new Person(randomFirstName, randomLastName, randomAge, randomSex);
             return person;
         }
     }
